@@ -1,10 +1,13 @@
 import sys
-import src.greeter as greeter
+from src.CameraClient import CameraClient
 
 
 def main():
     args = sys.argv[1:]
-    print(greeter.get_greeting(" ".join(args)))
+
+    camera_client = CameraClient()
+
+    camera_client.capture_snapshot()
 
 
 if __name__ == "__main__":
