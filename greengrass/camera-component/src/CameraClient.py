@@ -14,4 +14,4 @@ class CameraClient:
         self.picam2.start()
 
     def capture_snapshot(self):
-        self.picam2.capture_file(f"snapshot_{int(time.time())}.jpg")
+        self.picam2.capture_file(f"/greengrass/files/camera/snapshot_{int(time.time())}.jpg")

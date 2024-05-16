@@ -10,8 +10,8 @@
         }
       },
       "publish": {
-        "bucket": "<PLACEHOLDER_BUCKET>",
-        "region": "<PLACEHOLDER_REGION>"
+        "bucket": "iot-greengrass-przemo",
+        "region": "eu-central-1"
       }
     }
   },
