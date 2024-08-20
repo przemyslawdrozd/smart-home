@@ -49,8 +49,9 @@ aws configure
 ```
 
 ### 2. Via AWS console -> Core Devices -> Set Up
-Download & Run Installer
+Download & Run Installer on RPI
 ```bash
+sudo apt install default-jdk -y
 curl -s https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip > greengrass-nucleus-latest.zip && unzip greengrass-nucleus-latest.zip -d GreengrassInstaller
 ```
 ```bash
