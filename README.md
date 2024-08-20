@@ -59,13 +59,13 @@ sudo -E java -Droot="/greengrass/v2" -Dlog.store=FILE -jar ./GreengrassInstaller
 ```
 
 ## Part 3 - Setup GDK on Development OS 
-Install GDK and init component
+Install GDK and init component to create custom components
 ```bash
 python3 -m pip install -U git+https://github.com/aws-greengrass/aws-greengrass-gdk-cli.git@v1.6.2
 ```
 ```bash 
 gdk component init
 ```
-## Part 4 - WIP [GreengrassCameraComponent](greengrass%2Fcamera-component%2FREADME.md)
+## Part 4 - How to use [GreengrassCameraComponent](greengrass%2Fcamera-component%2FREADME.md)
 
 ## Part 5 - TODO Amplify IoT

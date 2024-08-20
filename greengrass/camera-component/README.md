@@ -1,13 +1,27 @@
-## My Project
 
-TODO: Fill this README out!
+---
+# Camera Component
 
-Be sure to:
+## Prerequisites
 
-* Change the title in this README
-* Edit your repository description 
+### Give the greengrass permission for 
+```bash
+sudo visudo
+```
 
-## License
+### Add line to opened textfile
+```ggc_user    ALL=(ALL:ALL) NOPASSWD: ALL```
 
-Add License information here
+### Create target directory for snapshots
+```bash
+sudo mkdir -p /greengrass/files/camera/
+```
 
+## 1. Setup Greengrass Deployment using GDK
+```bash
+cd /greenrass/camera-component
+gdk build
+gdk publish
+```
+
+## 2. Via AWS Console Revise deployment
