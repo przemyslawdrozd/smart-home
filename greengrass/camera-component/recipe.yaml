@@ -7,6 +7,31 @@ ComponentPublisher: "{COMPONENT_AUTHOR}"
 ComponentConfiguration:
   DefaultConfiguration:
     Message: "World"
+    accessControl:
+      aws.greengrass.ShadowManager:
+        'com.example.CameraComponent:shadow:1':
+          policyDescription: 'Allows access to shadows'
+          operations:
+            - 'aws.greengrass#GetThingShadow'
+            - 'aws.greengrass#UpdateThingShadow'
+            - 'aws.greengrass#DeleteThingShadow'
+          resources:
+            - $aws/things/{iot:thingName}/shadow
+            - $aws/things/{iot:thingName}/shadow/name/rpi4-desk
+        'com.example.CameraComponent:shadow:2':
+          policyDescription: 'Allows access to things with shadows'
+          operations:
+            - 'aws.greengrass#ListNamedShadowsForThing'
+          resources:
+            - {iot:thingName}
+      aws.greengrass.ipc.pubsub:
+        'com.example.CameraComponent:pubsub:1':
+          policyDescription: 'Allows access to shadow pubsub topics'
+          operations:
+            - 'aws.greengrass#SubscribeToTopic'
+          resources:
+            - $aws/things/{iot:thingName}/shadow/get/accepted
+            - $aws/things/{iot:thingName}/shadow/name/rpi4-desk/get/accepted
 Manifests:
   - Platform:
       os: all
