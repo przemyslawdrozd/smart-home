@@ -1,0 +1,41 @@
+---
+RecipeFormatVersion: "2020-01-25"
+ComponentName: "ShadowManagerComponent"
+ComponentVersion: "{COMPONENT_VERSION}"
+ComponentDescription: "This is camera component to capture snapshots in jpg"
+ComponentPublisher: "{COMPONENT_AUTHOR}"
+ComponentConfiguration:
+  DefaultConfiguration:
+      accessControl:
+        aws.greengrass.ipc.pubsub:
+          com.example.ShadowManager:pubsub:1:
+            policyDescription: "Allows access to publish."
+            operations:
+              - "aws.greengrass#PublishToTopic"
+              - "aws.greengrass#SubscribeToTopic"
+            resources:
+             - "*"
+        aws.greengrass.ShadowManager:
+          com.example.ShadowManager:shadow:1:
+            policyDescription: "Allow access to shadow."
+            operations:
+              - "aws.greengrass#GetThingShadow"
+              - "aws.greengrass#UpdateThingShadow"
+              - "aws.greengrass#DeleteThingShadow"
+            resources:
+              - '*'
+          com.example.ShadowManager:shadow:2:
+            policyDescription: "Allows access to thing with shadow"
+            operations:
+              - "aws.greengrass#ListNamedShadowForThing"
+            resources:
+              - '*'
+Manifests:
+  - Platform:
+      os: all
+    Artifacts:
+      - URI: "s3://BUCKET_NAME/COMPONENT_NAME/COMPONENT_VERSION/com.example.ShadowManager.zip"
+        Unarchive: ZIP
+    Lifecycle:
+      RequiresPrivilage: true
+      Run: "python3 -u {artifacts:decompressedPath}/com.example.ShadowManager/main.py {configuration:/Message}"

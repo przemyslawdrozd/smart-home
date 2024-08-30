@@ -9,13 +9,13 @@ from awsiot.greengrasscoreipc.model import (
 )
 
 
-def shadowManager(thing_name):
+def main():
     args = sys.argv[1:]
-    topic = args[0]
+    # topic = args[0]
+    topic = '$aws/things/RPI4Desk/shadow/name/rpi4-desk/update/#'
 
-    print('topic', topic)
-    print('thing_name', thing_name)
     try:
+        print('Create IPC Client')
         ipc_client = GreengrassCoreIPCClientV2()
         # Subscription operations return a tuple with the response and the operation.
         _, operation = ipc_client.subscribe_to_topic(topic=topic, on_stream_event=on_stream_event,
@@ -25,7 +25,7 @@ def shadowManager(thing_name):
         # Keep the main thread alive, or the process will exit.
         try:
             while True:
-                print('ipc alive..')
+                print('Listning..')
                 time.sleep(10)
         except InterruptedError:
             print('Subscribe interrupted.')
@@ -44,6 +44,7 @@ def shadowManager(thing_name):
 
 
 def on_stream_event(event: SubscriptionResponseMessage) -> None:
+    print('on_stream_event triggered')
     try:
         message = str(event.binary_message.message, 'utf-8')
         topic = event.binary_message.context.topic
@@ -61,3 +62,6 @@ def on_stream_error(error: Exception) -> bool:
 def on_stream_closed() -> None:
     print('Subscribe to topic stream closed.')
 
+
+if __name__ == '__main__':
+    main()
