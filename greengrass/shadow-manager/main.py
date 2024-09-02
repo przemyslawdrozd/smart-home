@@ -12,6 +12,7 @@ def on_stream_event(event):
         topic_name = event.message.topic_name
         message = str(event.message.payload, 'utf-8')
         print(f'Received new message on topic {topic_name}:  {message}')
+
     except:
         traceback.print_exc()
 

@@ -22,13 +22,13 @@ ComponentConfiguration:
             - aws.greengrass#UpdateThingShadow
             - aws.greengrass#DeleteThingShadow
           resources:
-            - "arn:aws:iot:eu-central-1:161829540768:thing/RPI4Desk"
+            - "arn:aws:iot:eu-central-1:{ACCOUNT_ID}:thing/{iot:thingName}"
         'com.example.ShadowManager:shadow:2':
           policyDescription: Allows access to list named shadows for a specific thing.
           operations:
             - aws.greengrass#ListNamedShadowsForThing
           resources:
-            - "arn:aws:iot:eu-central-1:161829540768:thing/RPI4Desk"
+            - "arn:aws:iot:eu-central-1:{ACCOUNT_ID}:thing/{iot:thingName}"
 Manifests:
   - Platform:
       os: all
