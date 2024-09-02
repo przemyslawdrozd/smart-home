@@ -14,4 +14,5 @@ Manifests:
       - URI: "s3://BUCKET_NAME/COMPONENT_NAME/COMPONENT_VERSION/com.example.CameraComponent.zip"
         Unarchive: ZIP
     Lifecycle:
+      RequiresPrivilage: true
       Run: "sudo python3 -u {artifacts:decompressedPath}/com.example.CameraComponent/main.py {configuration:/Message}"

@@ -1,0 +1,39 @@
+RecipeFormatVersion: '2020-01-25'
+ComponentName: com.example.ShadowManager
+ComponentVersion: "{COMPONENT_VERSION}"
+ComponentDescription: A component that subscribes to messages.
+ComponentPublisher: "{COMPONENT_AUTHOR}"
+ComponentConfiguration:
+  DefaultConfiguration:
+    accessControl:
+      aws.greengrass.ipc.mqttproxy:
+        com.example.ShadowManager:mqttproxy:1:
+          policyDescription: Allows access to publish/subscribe to specific topics.
+          operations:
+            - aws.greengrass#PublishToIoTCore
+            - aws.greengrass#SubscribeToIoTCore
+          resources:
+            - "$aws/things/RPI4Desk/shadow/update/accepted"
+      aws.greengrass.ShadowManager:
+        'com.example.ShadowManager:shadow:1':
+          policyDescription: Allow access to shadow operations for a specific thing.
+          operations:
+            - aws.greengrass#GetThingShadow
+            - aws.greengrass#UpdateThingShadow
+            - aws.greengrass#DeleteThingShadow
+          resources:
+            - "arn:aws:iot:eu-central-1:{ACCOUNT_ID}:thing/{iot:thingName}"
+        'com.example.ShadowManager:shadow:2':
+          policyDescription: Allows access to list named shadows for a specific thing.
+          operations:
+            - aws.greengrass#ListNamedShadowsForThing
+          resources:
+            - "arn:aws:iot:eu-central-1:{ACCOUNT_ID}:thing/{iot:thingName}"
+Manifests:
+  - Platform:
+      os: all
+    Lifecycle:
+      Run: "python3 -u {artifacts:decompressedPath}/com.example.ShadowManager/main.py"
+    Artifacts:
+      - URI: "s3://BUCKET_NAME/COMPONENT_NAME/COMPONENT_VERSION/com.example.ShadowManager.zip"
+        Unarchive: ZIP
