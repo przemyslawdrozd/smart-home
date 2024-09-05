@@ -1,10 +1,12 @@
 
 from src.ShadowManager import ShadowManager
-
+from src.MqttPublisher import MqttPublisher
 def main():
     try:
+        print("Create mqtt publisher client")
+        mqtt_client = MqttPublisher()
         print("Create Shadow Manager client")
-        shadow_manager = ShadowManager()
+        shadow_manager = ShadowManager(mqtt_client)
 
         print("Subscribe to Iot Core Topic")
         shadow_manager.subscribe_to_topic()

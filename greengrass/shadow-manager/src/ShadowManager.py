@@ -2,29 +2,17 @@ import threading
 import traceback
 import awsiot.greengrasscoreipc.clientv2 as clientV2
 import json
-import paho.mqtt.client as mqtt
 
 SHADOW_TOPIC = '$aws/things/RPI4Desk/shadow/update/accepted'
 QOS = '1'
 
-# MQTT Broker details (local)
-broker = "localhost"
-port = 1883
-topic = "camera/snapshot"
-
 
 class ShadowManager:
-    def __init__(self):
+    def __init__(self, mqtt_client):
+        self.mqtt_client = mqtt_client
         self.ipc_client = clientV2.GreengrassCoreIPCClientV2()
         self.operation = None
         print("Connected to IPC V2")
-
-        self.client = mqtt.Client()
-        self.client.on_publish = self.on_mqtt_publish
-        self.client.connect(broker, port)
-
-    def on_mqtt_publish(self, client, userdata, result):
-        print(f"Data published to {topic}")
 
     def subscribe_to_topic(self):
         resp, operation = self.ipc_client.subscribe_to_iot_core(
@@ -42,7 +30,8 @@ class ShadowManager:
             topic_name = event.message.topic_name
             message = str(event.message.payload, 'utf-8')
             print(f'Received new message on topic {topic_name}:  {message}')
-            self.client.publish(topic, message)
+            self.mqtt_client.client.publish("camera/snapshot", message)
+            print("published message")
         except:
             traceback.print_exc()
 
