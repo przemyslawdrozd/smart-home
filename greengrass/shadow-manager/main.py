@@ -1,44 +1,24 @@
-import threading
-import traceback
 
-import awsiot.greengrasscoreipc.clientv2 as clientV2
-
-topic = '$aws/things/RPI4Desk/shadow/update/accepted'
-qos = '1'
-
-
-def on_stream_event(event):
+from src.ShadowManager import ShadowManager
+from src.MqttPublisher import MqttPublisher
+def main():
     try:
-        topic_name = event.message.topic_name
-        message = str(event.message.payload, 'utf-8')
-        print(f'Received new message on topic {topic_name}:  {message}')
+        print("Create mqtt publisher client")
+        mqtt_client = MqttPublisher()
+        print("Create Shadow Manager client")
+        shadow_manager = ShadowManager(mqtt_client)
 
-    except:
-        traceback.print_exc()
+        print("Subscribe to Iot Core Topic")
+        shadow_manager.subscribe_to_topic()
+
+        print("Keep execution loop")
+        shadow_manager.keep_loop_connection()
+
+        print("Component closed!")
+
+    except Exception as e:
+        print("Error on main", e)
 
 
-def on_stream_error(error):
-    # Return True to close stream, False to keep stream open.
-    return True
-
-
-def on_stream_closed():
-    pass
-
-
-ipc_client = clientV2.GreengrassCoreIPCClientV2()
-resp, operation = ipc_client.subscribe_to_iot_core(
-    topic_name=topic,
-    qos=qos,
-    on_stream_event=on_stream_event,
-    on_stream_error=on_stream_error,
-    on_stream_closed=on_stream_closed
-)
-
-# Keep the main thread alive, or the process will exit.
-event = threading.Event()
-event.wait()
-
-# To stop subscribing, close the operation stream.
-operation.close()
-ipc_client.close()
+if __name__ == "__main__":
+    main()

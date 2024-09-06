@@ -1,20 +1,21 @@
 import sys
 from src.CameraClient import CameraClient
+from src.MqttListener import MqttListener
 
 
 def main():
     try:
-        print("Start camera component")
         args = sys.argv[1:]
+        print("Start camera component")
 
         camera_client = CameraClient()
-        print("Camera client connected")
+        mqtt_client = MqttListener(camera_client)
 
-        camera_client.capture_snapshot()
-        print("Snapshot created")
+        print("Waiting for messages...")
+        mqtt_client.loop_connection()
 
     except Exception as e:
-        print("Error on main", e)
+        print("Error in main:", e)
 
 
 if __name__ == "__main__":
