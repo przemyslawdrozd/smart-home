@@ -5,9 +5,6 @@ ComponentVersion: "{COMPONENT_VERSION}"
 ComponentDescription: "This is camera component to capture snapshots in jpg"
 ComponentPublisher: "{COMPONENT_AUTHOR}"
 ComponentDependencies:
-  aws.greengrass.TokenExchangeService:
-    VersionRequirement: ">=2.0.0 <3.0.0"
-    DependencyType: "HARD"
   com.example.ShadowManager:
     VersionRequirement: ">=1.0.0 <1.1.0"
     DependencyType: "HARD"

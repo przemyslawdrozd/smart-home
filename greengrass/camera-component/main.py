@@ -1,19 +1,18 @@
 import sys
 from src.CameraClient import CameraClient
 from src.MqttListener import MqttListener
-from src.S3Client import S3Client
 
-BUCKET_NAME = "dev-przemo-device-storage"
+
 
 
 def main():
     try:
         args = sys.argv[1:]
-        print("Create S3 Client")
-        s3_client = S3Client(BUCKET_NAME)
+        # print("Create S3 Client")
+        # s3_client = S3Client(BUCKET_NAME)
 
         print("Start camera component")
-        camera_client = CameraClient(s3_client)
+        camera_client = CameraClient()
 
         print("Create MQTT Client")
         mqtt_client = MqttListener(camera_client)

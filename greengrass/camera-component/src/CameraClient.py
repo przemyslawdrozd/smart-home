@@ -3,8 +3,8 @@ from picamera2 import Picamera2
 
 
 class CameraClient:
-    def __init__(self, s3_client):
-        self.s3_client = s3_client
+    def __init__(self):
+        # self.s3_client = s3_client
         self.picam2 = None
         self._init_client()
 
@@ -29,6 +29,6 @@ class CameraClient:
             self.picam2.capture_file(f"/greengrass/files/camera/{file_name}")
 
 
-            self.s3_client.upload(file_name)
+            # self.s3_client.upload(file_name)
         except Exception as e:
             print("Failed to capture snapshot", e)
