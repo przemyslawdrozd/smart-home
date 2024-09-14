@@ -4,6 +4,7 @@ from picamera2 import Picamera2
 
 class CameraClient:
     def __init__(self):
+        # self.s3_client = s3_client
         self.picam2 = None
         self._init_client()
 
@@ -21,9 +22,16 @@ class CameraClient:
             raise RuntimeError(
                 "Permission denied while accessing camera devices. Ensure the process has appropriate permissions.") from e
 
-    def capture_snapshot(self, data):
+    def capture_snapshot(self) -> str:
         try:
-            print("Capture snapshot", data)
-            self.picam2.capture_file(f"/greengrass/files/camera/snapshot_{int(time.time())}.jpg")
+            print("Capture snapshot")
+            file_name = f"/greengrass/files/camera/snapshot_{int(time.time())}.jpg"
+            self.picam2.capture_file(file_name)
+
+            print("return snapshot file name", file_name)
+            return file_name
+
+
+            # self.s3_client.upload(file_name)
         except Exception as e:
             print("Failed to capture snapshot", e)
