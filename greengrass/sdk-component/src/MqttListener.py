@@ -1,14 +1,12 @@
 import time
 import traceback
 import paho.mqtt.client as mqtt
-from MqttPublisher import MqttPublisher
-from CameraClient import CameraClient
+from S3Client import S3Client
 
 
 class MqttListener:
-    def __init__(self, mqtt_publisher: MqttPublisher, camera_client: CameraClient):
-        self.mqtt_publisher = mqtt_publisher
-        self.camera_client = camera_client
+    def __init__(self, s3_client: S3Client):
+        self.s3_client = s3_client
         self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -19,8 +17,8 @@ class MqttListener:
     def on_connect(client, userdata, flags, rc, properties=None):
         if rc == 0:
             print("Connected to MQTT Broker!")
-            client.subscribe("camera/snapshot")
-            print(f"Subscribed to topic: camera/snapshot")
+            client.subscribe("camera/upload")
+            print(f"Subscribed to topic: camera/upload")
         else:
             print("Failed to connect, return code %d\n", rc)
 
@@ -28,11 +26,10 @@ class MqttListener:
         print(f"Message received: {msg.payload.decode()} on topic {msg.topic}")
         try:
             # Assuming that any message received on this topic triggers a snapshot
-            file_name = self.camera_client.capture_snapshot()
-            res = self.mqtt_publisher.client.publish("camera/upload", file_name)
-            print("published on camera/upload", res)
+            file_name = msg.payload.decode()
+            self.s3_client.upload(file_name)
         except Exception as e:
-            print("Error on_message MqttListener")
+            print("Error on_message MqttListener", e)
             traceback.print_exc()
 
     def loop_connection(self):

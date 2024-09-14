@@ -22,11 +22,14 @@ class CameraClient:
             raise RuntimeError(
                 "Permission denied while accessing camera devices. Ensure the process has appropriate permissions.") from e
 
-    def capture_snapshot(self, data):
+    def capture_snapshot(self) -> str:
         try:
-            print("Capture snapshot", data)
-            file_name = f"snapshot_{int(time.time())}.jpg"
-            self.picam2.capture_file(f"/greengrass/files/camera/{file_name}")
+            print("Capture snapshot")
+            file_name = f"/greengrass/files/camera/snapshot_{int(time.time())}.jpg"
+            self.picam2.capture_file(file_name)
+
+            print("return snapshot file name", file_name)
+            return file_name
 
 
             # self.s3_client.upload(file_name)

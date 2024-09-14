@@ -13,7 +13,7 @@ class S3Client:
         self.s3 = boto3.client('s3')
         self.bucket_name = bucket_name
 
-    def upload(self, file_name):
+    def upload(self, file_name) -> None:
         """Uploads a file to the specified S3 bucket."""
         try:
             file_path = f"/greengrass/files/camera/{file_name}"
