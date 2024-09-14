@@ -1,4 +1,8 @@
 import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
+
 from src.CameraClient import CameraClient
 from src.MqttListener import MqttListener
 from src.MqttPublisher import MqttPublisher

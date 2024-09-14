@@ -1,4 +1,7 @@
 import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
+
 from src.S3Client import S3Client
 from src.MqttListener import MqttListener
 
@@ -13,7 +16,7 @@ def main():
 
     mqtt_client = MqttListener(s3_client)
 
-    s3_client.upload("test.jpg")
+    s3_client.upload("/greengrass/files/camera/test.jpg")
 
     print("Waiting for messages...")
     mqtt_client.loop_connection()
