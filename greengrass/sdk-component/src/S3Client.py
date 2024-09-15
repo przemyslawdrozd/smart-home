@@ -13,10 +13,10 @@ class S3Client:
         self.s3 = boto3.client('s3')
         self.bucket_name = bucket_name
 
-    def upload(self, file_name) -> None:
+    def upload(self, file_path) -> None:
         """Uploads a file to the specified S3 bucket."""
         try:
-            file_path = f"/greengrass/files/camera/{file_name}"
+
             if not os.path.exists(file_path):
                 raise FileNotFoundError(f"The file {file_path} does not exist.")
 
@@ -24,10 +24,10 @@ class S3Client:
 
             # Upload the file
             self.s3.upload_file(file_path, self.bucket_name, object_name)
-            logging.info(f"File {file_name} successfully uploaded to s3://{self.bucket_name}/{object_name}")
+            logging.info(f"File {file_path} successfully uploaded to s3://{self.bucket_name}/{object_name}")
 
         except FileNotFoundError as fnf_error:
-            logging.error(f"The file {file_name} was not found: {fnf_error}")
+            logging.error(f"The file {file_path} was not found: {fnf_error}")
             raise fnf_error
 
         except NoCredentialsError as nce_error:

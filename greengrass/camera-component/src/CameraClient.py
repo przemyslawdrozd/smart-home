@@ -25,11 +25,11 @@ class CameraClient:
     def capture_snapshot(self) -> str:
         try:
             print("Capture snapshot")
-            file_name = f"/greengrass/files/camera/snapshot_{int(time.time())}.jpg"
-            self.picam2.capture_file(file_name)
+            file_path = f"/greengrass/files/camera/snapshot_{int(time.time())}.jpg"
+            self.picam2.capture_file(file_path)
 
-            print("return snapshot file name", file_name)
-            return file_name
+            print("return snapshot file name", file_path)
+            return file_path
 
 
             # self.s3_client.upload(file_name)

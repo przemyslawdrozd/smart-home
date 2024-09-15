@@ -28,8 +28,8 @@ class MqttListener:
         print(f"Message received: {msg.payload.decode()} on topic {msg.topic}")
         try:
             # Assuming that any message received on this topic triggers a snapshot
-            file_name = self.camera_client.capture_snapshot()
-            res = self.mqtt_publisher.client.publish("camera/upload", file_name)
+            file_path = self.camera_client.capture_snapshot()
+            res = self.mqtt_publisher.client.publish("camera/upload", file_path)
             print("published on camera/upload", res)
         except Exception as e:
             print("Error on_message MqttListener")
