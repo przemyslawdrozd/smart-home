@@ -25,3 +25,5 @@ gdk publish
 ```
 
 ## 2. Via AWS Console Revise deployment
+
+### Next step is to setup Shadow Manager

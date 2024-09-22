@@ -1,6 +1,6 @@
 # PoC - RPI Camera module integrated with React Web App via AWS Greengrass & Amplify 
 
-#### The guide in 5 steps how from 0 to s
+#### The guide in 5 steps how from scratch
 - **Setup RPI & Camera Component**
 - **Connect via AWS CLI**
 - **Create Greengrass device (Thing)**
@@ -68,4 +68,4 @@ gdk component init
 ```
 ## Part 4 - How to use [GreengrassCameraComponent](greengrass%2Fcamera-component%2FREADME.md)
 
-## Part 5 - TODO Amplify IoT
+## Part 5 - [React Amplify Web App](greengrass%2Fcamera-component%2FREADME.md)

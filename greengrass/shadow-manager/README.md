@@ -14,3 +14,8 @@ sudo apt-get install mosquitto mosquitto-clients
 ```bash
 sudo systemctl start mosquitto
 ```
+
+## Step 3: Connect with Shadow Document on cloud site
+Add shadow document for thing and revise deployment with aws.greengrass.ShadowManager
+
+### Next step is to upload snapshot into S3 using sdk-component
