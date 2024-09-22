@@ -1,13 +1,7 @@
-## My Project
+# Setting Up a Boto3 sdk
 
-TODO: Fill this README out!
+### Component will get file and upload into s3. 
 
-Be sure to:
+## Step 1: Provide bucket name via config during revise
 
-* Change the title in this README
-* Edit your repository description 
-
-## License
-
-Add License information here
-
+## Step 2: Update Policy to authorize access to bucket using [aws.greengrass.TokenExchangeService](https://docs.aws.amazon.com/greengrass/v2/developerguide/token-exchange-service-component.html?icmpid=docs_gg_console)

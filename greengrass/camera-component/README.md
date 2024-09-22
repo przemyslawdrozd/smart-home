@@ -25,3 +25,4 @@ gdk publish
 ```
 
 ## 2. Via AWS Console Revise deployment
+### Next step is to setup [Custom Shadow Manager Component](https://github.com/przemyslawdrozd/smart-home/blob/16-add-readme/greengrass/shadow-manager/README.md)

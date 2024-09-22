@@ -1,6 +1,7 @@
 # PoC - RPI Camera module integrated with React Web App via AWS Greengrass & Amplify 
+![smart-home-diagram drawio](https://github.com/user-attachments/assets/8edc7ba7-8cfc-4de3-8ebf-08c6326f345e)
 
-#### The guide in 5 steps how from 0 to s
+#### The guide in 5 steps how from scratch
 - **Setup RPI & Camera Component**
 - **Connect via AWS CLI**
 - **Create Greengrass device (Thing)**
@@ -68,4 +69,4 @@ gdk component init
 ```
 ## Part 4 - How to use [GreengrassCameraComponent](greengrass%2Fcamera-component%2FREADME.md)
 
-## Part 5 - TODO Amplify IoT
+## Part 5 - [React Amplify Web App](https://github.com/przemyslawdrozd/amplify-vite-react-smarthome)
