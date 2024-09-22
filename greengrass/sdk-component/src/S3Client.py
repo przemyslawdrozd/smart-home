@@ -23,8 +23,8 @@ class S3Client:
             object_name = os.path.basename(file_path)
 
             # Upload the file
-            self.s3.upload_file(file_path, self.bucket_name, object_name)
-            logging.info(f"File {file_path} successfully uploaded to s3://{self.bucket_name}/{object_name}")
+            self.s3.upload_file(file_path, self.bucket_name, f"snapshots/{object_name}")
+            logging.info(f"File {file_path} successfully uploaded to s3://{self.bucket_name}/snapshots/{object_name}")
 
         except FileNotFoundError as fnf_error:
             logging.error(f"The file {file_path} was not found: {fnf_error}")
@@ -43,5 +43,5 @@ class S3Client:
             raise ec_error
 
         except Exception as e:
-            logging.error(f"An unexpected error occurred while uploading {file_name}: {e}")
+            logging.error(f"An unexpected error occurred while uploading {file_path}: {e}")
             raise e
