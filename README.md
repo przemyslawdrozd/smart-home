@@ -1,4 +1,5 @@
 # PoC - RPI Camera module integrated with React Web App via AWS Greengrass & Amplify 
+![smart-home-diagram drawio](https://github.com/user-attachments/assets/8edc7ba7-8cfc-4de3-8ebf-08c6326f345e)
 
 #### The guide in 5 steps how from scratch
 - **Setup RPI & Camera Component**
