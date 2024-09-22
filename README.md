@@ -69,4 +69,4 @@ gdk component init
 ```
 ## Part 4 - How to use [GreengrassCameraComponent](greengrass%2Fcamera-component%2FREADME.md)
 
-## Part 5 - [React Amplify Web App](greengrass%2Fcamera-component%2FREADME.md)
+## Part 5 - [React Amplify Web App](https://github.com/przemyslawdrozd/amplify-vite-react-smarthome)
