@@ -8,11 +8,14 @@ ComponentDependencies:
   aws.greengrass.TokenExchangeService:
     VersionRequirement: '^2.0.0'
     DependencyType: HARD
+ComponentConfiguration:
+  DefaultConfiguration:
+    Bucket: "<put_bucket_name_on_revise>"
 Manifests:
   - Platform:
       os: linux
     Lifecycle:
-      Run: "python3 -u {artifacts:decompressedPath}/com.example.SdkComponent/main.py"
+      Run: "python3 -u {artifacts:decompressedPath}/com.example.SdkComponent/main.py {configuration:/Bucket}"
     Artifacts:
       - URI: "s3://BUCKET_NAME/COMPONENT_NAME/COMPONENT_VERSION/com.example.SdkComponent.zip"
         Unarchive: ZIP

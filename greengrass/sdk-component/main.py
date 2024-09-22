@@ -5,14 +5,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 from src.S3Client import S3Client
 from src.MqttListener import MqttListener
 
-BUCKET_NAME = "dev-przemo-device-storage"
-
-
 def main():
     args = sys.argv[1:]
 
+    print(args)
+    snapshot_bucket = args[0]
     print("Create S3 Client")
-    s3_client = S3Client(BUCKET_NAME)
+    s3_client = S3Client(snapshot_bucket)
 
     mqtt_client = MqttListener(s3_client)
 
