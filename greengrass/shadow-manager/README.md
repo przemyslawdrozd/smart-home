@@ -18,4 +18,4 @@ sudo systemctl start mosquitto
 ## Step 3: Connect with Shadow Document on cloud site
 Add shadow document for thing and revise deployment with aws.greengrass.ShadowManager
 
-### Next step is to upload snapshot into S3 using sdk-component
+### Next step is to upload snapshot into S3 using sdk-component [sdk-component](https://github.com/przemyslawdrozd/smart-home/blob/16-add-readme/greengrass/sdk-component/README.md)
